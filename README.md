@@ -7,7 +7,7 @@ It also uses other libraries like requests and bs4, they are included in the ```
 
 # Installation
 
-Just install the libraries in the ```requirements.txt file ``` or just run - in your terminal/cmd - ```pip install -r requirements.txt```
+Just install the libraries in the ```requirements.txt``` file or just run - in your terminal/cmd - ```pip install -r requirements.txt```
 
 # How to run
 
