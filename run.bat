@@ -13,5 +13,5 @@ if %errorlevel% neq 0 (
 
 :: Add your admin tasks below
 cd /d %script_path%
-python main.py
+python "main.py"
 pause
