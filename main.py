@@ -6,6 +6,7 @@ import sys
 from collections import deque
 from bs4 import BeautifulSoup
 
+queue = deque()
 headers = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
     "authority": "anime3rb.com",
@@ -42,9 +43,11 @@ def start_downloads(anime_name: str, episodes: int) -> None:
     for counter in range(start, episodes + 1):
         link = queue.popleft()
         print(f"starting the download for episode {counter} out of {episodes} please wait...", end = '\r')
-        ep_name = f"{anime_name} - episode {counter}-{episodes}.mp4"
+        ep_name = f"{anime_name} - episode {counter}-{episodes}"
         if counter == episodes:
             ep_name += " [END]"
+        ep_name += '.mp4'
+        
         download_video(link, ep_name)
         print(f"episode {counter}-{episodes} downloaded successfully")
 
@@ -62,7 +65,6 @@ def get_episode_links(url: str, episodes: int) -> list[str]:
 
 def get_download_links(episode_links: list[str]) -> list[str]:
     global queue, start
-    queue = deque()
     for episode in episode_links[start - 1:]:
         page = requests.get(episode, headers=headers)
         soup = BeautifulSoup(page.content, "html.parser")
@@ -124,4 +126,7 @@ def main(url) -> None:
     os.system("exit")
 
 if __name__ == "__main__":
-    main(sys.argv[1])
+    if len(sys.argv) < 2:
+        main(input("Enter the url of the anime (e.g. https://anime3rb.com/titles/naruto): ").strip())
+    else: 
+        main(sys.argv[1])
