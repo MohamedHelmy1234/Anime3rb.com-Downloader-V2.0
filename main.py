@@ -77,12 +77,12 @@ def get_download_links(episode_links: list[str]):
         desired = [None, None]
 
         for link in download_links:
-            if "1080" in link.text:
-                desired = [1080, link]
+            if "480" in link.text:
+                desired = [480, link]
             elif "720" in link.text and desired[0] != 1080:
                 desired = [720, link]
             elif not desired[1]:  
-                desired = [480, link]  
+                desired = [1080, link]  
 
         if desired[1]:
             queue.append(desired[1].parent.find("a")["href"])
