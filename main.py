@@ -107,9 +107,13 @@ def main(url):
     episodes_cnt = get_episode_cnt(soup)
 
     episode_links = get_episode_links(url, episodes_cnt)
+    print(f"{anime_name} has {episodes_cnt} episodes.")
 
     global start
-    start = 1
+    # start = 1
+    start = int(input("Enter the episode number to start from: "))
+    while start < 1 or start > episodes_cnt:
+        start = int(input("Invalid episode number. Please enter a number between 1 and {} (inclusive): ".format(episodes_cnt)))
 
     threading.Thread(target=get_download_links, args=[episode_links]).start()
     start_downloads(anime_name, episodes_cnt)
