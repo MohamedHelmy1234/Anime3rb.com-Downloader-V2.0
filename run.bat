@@ -13,4 +13,4 @@ if %errorlevel% neq 0 (
 
 :: Add your admin tasks below
 cd /d %script_path%
-python batch.py
+python main.py
